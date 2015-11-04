@@ -30,6 +30,12 @@ class UsersTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->hasMany('ProductsOwned', [
+						'className' => 'Products',
+            'foreignKey' => 'owner'
+        ]);
+
+
     }
 
     /**
@@ -60,10 +66,6 @@ class UsersTable extends Table
             ->add('email', 'valid', ['rule' => 'email'])
             ->requirePresence('email', 'create')
             ->notEmpty('email');
-
-        $validator
-            ->requirePresence('role', 'create')
-            ->notEmpty('role');
 
         return $validator;
     }

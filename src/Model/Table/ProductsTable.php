@@ -26,13 +26,18 @@ class ProductsTable extends Table
         parent::initialize($config);
 
         $this->table('products');
-        $this->displayField('id');
+        $this->displayField('name');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
 
         $this->hasMany('Sales', [
             'foreignKey' => 'product_id'
+        ]);
+
+        $this->belongsTo('Owner', [
+						'className' => 'Users',
+						'foreignKey' => 'owner'
         ]);
     }
 
@@ -49,8 +54,8 @@ class ProductsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('nome', 'create')
-            ->notEmpty('nome');
+            ->requirePresence('name', 'create')
+            ->notEmpty('name');
 
         $validator
             ->allowEmpty('description');

@@ -47,6 +47,7 @@ class ProductsController extends AppController
     {
         $product = $this->Products->newEntity();
         if ($this->request->is('post')) {
+						$this->request->data['created_by'] = $this->Auth->User('id');
             $product = $this->Products->patchEntity($product, $this->request->data);
             if ($this->Products->save($product)) {
                 $this->Flash->success(__('The product has been saved.'));
@@ -55,7 +56,8 @@ class ProductsController extends AppController
                 $this->Flash->error(__('The product could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('product'));
+        $users = $this->Products->Owner->find('list', ['limit' => 200]);
+        $this->set(compact('product', 'users'));
         $this->set('_serialize', ['product']);
     }
 

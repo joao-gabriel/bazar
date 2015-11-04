@@ -1,18 +1,11 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Product'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Sales'), ['controller' => 'Sales', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Sale'), ['controller' => 'Sales', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
+<?php echo $this->element('menu'); ?>
 <div class="products index large-9 medium-8 columns content">
     <h3><?= __('Products') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('nome') ?></th>
+                <th><?= $this->Paginator->sort('name') ?></th>
                 <th><?= $this->Paginator->sort('created_by') ?></th>
                 <th><?= $this->Paginator->sort('owner') ?></th>
                 <th><?= $this->Paginator->sort('price') ?></th>
@@ -25,7 +18,7 @@
             <?php foreach ($products as $product): ?>
             <tr>
                 <td><?= $this->Number->format($product->id) ?></td>
-                <td><?= h($product->nome) ?></td>
+                <td><?= h($product->name) ?></td>
                 <td><?= $this->Number->format($product->created_by) ?></td>
                 <td><?= $this->Number->format($product->owner) ?></td>
                 <td><?= $this->Number->format($product->price) ?></td>
