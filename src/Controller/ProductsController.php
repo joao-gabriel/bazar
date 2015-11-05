@@ -18,6 +18,9 @@ class ProductsController extends AppController
      */
     public function index()
     {
+
+			  $this->paginate = ['contain' => ['ProductOwner', 'ProductCreatedBy']];
+
         $this->set('products', $this->paginate($this->Products));
         $this->set('_serialize', ['products']);
     }
@@ -47,7 +50,7 @@ class ProductsController extends AppController
     {
         $product = $this->Products->newEntity();
         if ($this->request->is('post')) {
-						$this->request->data['created_by'] = $this->Auth->User('id');
+						$this->request->data['created_by'] = (string)$this->Auth->User('id');
             $product = $this->Products->patchEntity($product, $this->request->data);
             if ($this->Products->save($product)) {
                 $this->Flash->success(__('The product has been saved.'));
@@ -56,7 +59,7 @@ class ProductsController extends AppController
                 $this->Flash->error(__('The product could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Products->Owner->find('list', ['limit' => 200]);
+        $users = $this->Products->ProductOwner->find('list', ['limit' => 200]);
         $this->set(compact('product', 'users'));
         $this->set('_serialize', ['product']);
     }

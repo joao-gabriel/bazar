@@ -1,4 +1,6 @@
 <?php echo $this->element('menu'); ?>
+<?php
+//~ var_dump($products); ?>
 <div class="products index large-9 medium-8 columns content">
     <h3><?= __('Products') ?></h3>
     <table cellpadding="0" cellspacing="0">
@@ -19,8 +21,8 @@
             <tr>
                 <td><?= $this->Number->format($product->id) ?></td>
                 <td><?= h($product->name) ?></td>
-                <td><?= $this->Number->format($product->created_by) ?></td>
-                <td><?= $this->Number->format($product->owner) ?></td>
+                <td><?= $product->product_created_by->name ?></td>
+                <td><?= $product->product_owner->name ?></td>
                 <td><?= $this->Number->format($product->price) ?></td>
                 <td><?= h($product->created) ?></td>
                 <td><?= h($product->modified) ?></td>

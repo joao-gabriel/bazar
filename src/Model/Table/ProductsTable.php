@@ -35,10 +35,16 @@ class ProductsTable extends Table
             'foreignKey' => 'product_id'
         ]);
 
-        $this->belongsTo('Owner', [
+        $this->belongsTo('ProductOwner', [
 						'className' => 'Users',
 						'foreignKey' => 'owner'
         ]);
+
+        $this->belongsTo('ProductCreatedBy', [
+						'className' => 'Users',
+						'foreignKey' => 'created_by'
+        ]);
+
     }
 
     /**
