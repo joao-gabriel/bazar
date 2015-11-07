@@ -40,6 +40,10 @@ class UsersTable extends Table
             'foreignKey' => 'created_by'
         ]);
 
+       $this->hasMany('SalesRegisteredBy', [
+						'className' => 'Sales',
+            'foreignKey' => 'registered_by'
+        ]);       
 
     }
 

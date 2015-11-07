@@ -46,10 +46,12 @@ class SalesController extends AppController
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($productId = null)
     {
         $sale = $this->Sales->newEntity();
         if ($this->request->is('post')) {
+          $this->request->data['product_id'] = $productId;
+          $this->request->data['registered_by'] = (string)$this->Auth->User('id');
             $sale = $this->Sales->patchEntity($sale, $this->request->data);
             if ($this->Sales->save($sale)) {
                 $this->Flash->success(__('The sale has been saved.'));
@@ -57,9 +59,11 @@ class SalesController extends AppController
             } else {
                 $this->Flash->error(__('The sale could not be saved. Please, try again.'));
             }
-        }
-        $products = $this->Sales->Products->find('list', ['limit' => 200]);
-        $this->set(compact('sale', 'products'));
+        }          
+        $product = $this->Sales->Products->get($productId);
+        $this->request->data['product_name'] = $product->name;
+        $this->request->data['sale_price'] = $product->price;
+        $this->set(compact('sale', 'product'));
         $this->set('_serialize', ['sale']);
     }
 

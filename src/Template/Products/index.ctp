@@ -1,11 +1,10 @@
 <?php echo $this->element('menu'); ?>
-<?php
-//~ var_dump($products); ?>
 <div class="products index large-9 medium-8 columns content">
     <h3><?= __('Products') ?></h3>
     <table cellpadding="0" cellspacing="0" class="responsive">
         <thead>
             <tr>
+                <th><?= $this->Paginator->sort('id') ?></th>
                 <th><?= $this->Paginator->sort('name') ?></th>
                 <th><?= $this->Paginator->sort('owner') ?></th>
                 <th><?= $this->Paginator->sort('created_by') ?></th>
@@ -18,6 +17,7 @@
         <tbody>
             <?php foreach ($products as $product): ?>
             <tr>
+                <td><?= $this->Number->format($product->id) ?></td>
                 <td><?= h($product->name) ?></td>
                 <td><?= $product->product_owner->name ?></td>
                 <td><?= $product->product_created_by->name ?></td>

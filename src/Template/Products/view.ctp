@@ -28,43 +28,16 @@
         </tr>
     </table>
     <div class="row">
-        <h4><?= __('Description') ?></h4>
         <?= $this->Text->autoParagraph(h($product->description)); ?>
     </div>
     <div class="related">
-        <h4><?= __('Related Sales') ?></h4>
-        <?php if (!empty($product->sales)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th><?= __('Id') ?></th>
-                <th><?= __('Product Id') ?></th>
-                <th><?= __('Sale Price') ?></th>
-                <th><?= __('Buyer Name') ?></th>
-                <th><?= __('Created') ?></th>
-                <th><?= __('Modified') ?></th>
-                <th><?= __('Registered By') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($product->sales as $sales): ?>
-            <tr>
-                <td><?= h($sales->id) ?></td>
-                <td><?= h($sales->product_id) ?></td>
-                <td><?= h($sales->sale_price) ?></td>
-                <td><?= h($sales->buyer_name) ?></td>
-                <td><?= h($sales->created) ?></td>
-                <td><?= h($sales->modified) ?></td>
-                <td><?= h($sales->registered_by) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Sales', 'action' => 'view', $sales->id]) ?>
-
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Sales', 'action' => 'edit', $sales->id]) ?>
-
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Sales', 'action' => 'delete', $sales->id], ['confirm' => __('Are you sure you want to delete # {0}?', $sales->id)]) ?>
-
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php endif; ?>
+      <?php if (!empty($product->sales)): ?>
+        <?php foreach ($product->sales as $sales): ?>
+          <?php echo '<h5>Vendido para '.$sales->buyer_name.' por '.$sales->registered_by.'</h5>'; ?>
+          <?= $this->Html->link(__('Sale Details'), ['controller' => 'Sales', 'action' => 'view', $sales->id]); ?>
+        <?php endforeach; ?>
+      <?php else: ?>
+          <?= $this->Html->link(__('Sell'), ['controller' => 'Sales', 'action' => 'add', $product->id], ['class' => 'button radius']); ?>  
+      <?php endif; ?>
     </div>
 </div>
