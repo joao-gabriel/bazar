@@ -32,4 +32,13 @@ class Product extends Entity
         '*' => true,
         'id' => false,
     ];
+
+
+    public function generateQRCode(){
+
+			debug($this->id);
+
+		}
+
+
 }

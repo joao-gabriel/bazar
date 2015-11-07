@@ -107,4 +107,18 @@ class ProductsController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
+
+    public function generateQRCode($id = null){
+
+			if (is_null($id)){
+				$products = $this->Products->find('all', ['fields' => 'id']);
+			}else{
+				$products = $this->Products->get($id, ['fields' => 'id']);
+			}
+
+			debug($products);
+
+		}
+
 }
