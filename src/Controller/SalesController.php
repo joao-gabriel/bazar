@@ -19,7 +19,7 @@ class SalesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Products']
+            'contain' => ['Products', 'SalesRegisteredBy']
         ];
         $this->set('sales', $this->paginate($this->Sales));
         $this->set('_serialize', ['sales']);
@@ -35,7 +35,7 @@ class SalesController extends AppController
     public function view($id = null)
     {
         $sale = $this->Sales->get($id, [
-            'contain' => ['Products']
+            'contain' => ['Products', 'SalesRegisteredBy']
         ]);
         $this->set('sale', $sale);
         $this->set('_serialize', ['sale']);

@@ -31,7 +31,7 @@ class ProductsTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Sales', [
+        $this->HasOne('Sales', [
             'foreignKey' => 'product_id'
         ]);
 

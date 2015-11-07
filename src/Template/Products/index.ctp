@@ -1,6 +1,8 @@
 <?php echo $this->element('menu'); ?>
 <div class="products index large-9 medium-8 columns content">
     <h3><?= __('Products') ?></h3>
+    
+    <p><?= __('Gray rows means that product has been sold.'); ?></p>
     <table cellpadding="0" cellspacing="0" class="responsive">
         <thead>
             <tr>
@@ -15,8 +17,8 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($products as $product): ?>
-            <tr>
+            <?php foreach ($products as $product): ?>          
+            <tr <?php echo !empty($product->sale)?'style="background-color:#ccc"':'' ?>>
                 <td><?= $this->Number->format($product->id) ?></td>
                 <td><?= h($product->name) ?></td>
                 <td><?= $product->product_owner->name ?></td>

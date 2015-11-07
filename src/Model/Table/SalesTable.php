@@ -31,13 +31,13 @@ class SalesTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->hasOne('Products', [
-            'foreignKey' => 'id'
+        $this->belongsTo('Products', [
+            'foreignKey' => 'product_id'
         ]);
         
-        $this->belongsTo('SaleRegisteredBy', [
+        $this->belongsTo('SalesRegisteredBy', [
             'className' => 'Users',
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'registered_by'
         ]);
                 
     }
