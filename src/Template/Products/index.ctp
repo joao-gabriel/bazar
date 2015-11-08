@@ -1,7 +1,6 @@
 <?php echo $this->element('menu'); ?>
 <div class="products index large-9 medium-8 columns content">
-    <h3><?= __('Products') ?></h3>
-    
+    <h3><?= __('Products') ?></h3> 
     <p><?= __('Gray rows means that product has been sold.'); ?></p>
     <table cellpadding="0" cellspacing="0" class="responsive">
         <thead>
@@ -29,7 +28,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $product->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $product->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $product->id], ['confirm' => __('Are you sure you want to delete # {0}?', $product->name)]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $product->id], ['confirm' => __('Are you sure you want to delete {0}?', $product->name)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
