@@ -75,8 +75,10 @@ class ProductsController extends AppController
     public function edit($id = null)
     {
         $product = $this->Products->get($id, [
-            'contain' => []
+            'contain' => ['Sales', 'ProductOwner', 'ProductCreatedBy']
         ]);
+        $this->request->data['created_by'] = $product->created_by;
+        $this->request->data['string_product_created_by'] = $product->product_created_by->name;
         if ($this->request->is(['patch', 'post', 'put'])) {
             $product = $this->Products->patchEntity($product, $this->request->data);
             if ($this->Products->save($product)) {
@@ -86,7 +88,8 @@ class ProductsController extends AppController
                 $this->Flash->error(__('The product could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('product'));
+        $users = $this->Products->ProductOwner->find('list', ['limit' => 200]);
+        $this->set(compact('product', 'users'));
         $this->set('_serialize', ['product']);
     }
 
@@ -121,17 +124,17 @@ class ProductsController extends AppController
 			debug($products);
 
 		}
-    
+
     public function printlabels($id = null){
-      
+
 			if (is_null($id)){
 				$products = $this->Products->find('all', ['contain' => ['ProductOwner']] );
 			}else{
 				$products = $this->Products->get($id, ['contain' => ['ProductOwner']]);
-			}      
+			}
       $this->set(compact('products'));
-      $this->viewBuilder()->layout('print'); 
+      $this->viewBuilder()->layout('print');
     }
-    
+
 
 }
