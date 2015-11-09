@@ -54,7 +54,7 @@ class ProductsController extends AppController
             $product = $this->Products->patchEntity($product, $this->request->data);
             if ($this->Products->save($product)) {
                 $this->Flash->success(__('The product has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'add']);
             } else {
                 $this->Flash->error(__('The product could not be saved. Please, try again.'));
             }
@@ -120,5 +120,17 @@ class ProductsController extends AppController
 			debug($products);
 
 		}
+    
+    public function printlabels($id = null){
+      
+			if (is_null($id)){
+				$products = $this->Products->find('all', ['contain' => ['ProductOwner']] );
+			}else{
+				$products = $this->Products->get($id, ['contain' => ['ProductOwner']]);
+			}      
+      $this->set(compact('products'));
+      $this->viewBuilder()->layout('print'); 
+    }
+    
 
 }

@@ -2,8 +2,8 @@
   <ul class="side-nav accordion" data-accordion>
     <li class="accordion-navigation">
       <a href="#panel1a" >Menu</a>
-      <div id='panel1a' class='content'> 
-        <ul>
+      <div id='panel1a' class='content clearfix'> 
+        <ul class='none'>
           <li><?= $this->Html->link(__('New Product'), ['controller' => 'Products', 'action' => 'add']) ?></li>
           <li><?= $this->Html->link(__('List Products'), ['controller' => 'Products', 'action' => 'index']) ?></li>
           <!--<li><?= $this->Html->link(__('New Sale'), ['controller' => 'Sales', 'action' => 'add']) ?></li>-->
@@ -15,4 +15,5 @@
       </div>
     </li> 
   </ul>
+  <div class='clearfix'></div>
 </nav>
