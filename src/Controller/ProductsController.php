@@ -60,6 +60,7 @@ class ProductsController extends AppController
             }
         }
         $users = $this->Products->ProductOwner->find('list', ['limit' => 200]);
+        $this->request->data['owner'] = (string)$this->Auth->User('id');
         $this->set(compact('product', 'users'));
         $this->set('_serialize', ['product']);
     }

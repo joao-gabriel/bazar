@@ -8,6 +8,7 @@
       border: 1px solid; 
       text-align: center; 
       float: left; 
+      height: 210px;
     }
   </style>
   </head>
