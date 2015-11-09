@@ -48,6 +48,7 @@ class SalesController extends AppController
      */
     public function add($productId = null)
     {
+				die('Under Construction. <a href="javascript:history.back(-1)">Back</a>');
         $sale = $this->Sales->newEntity();
         if ($this->request->is('post')) {
           $this->request->data['product_id'] = $productId;
@@ -59,7 +60,7 @@ class SalesController extends AppController
             } else {
                 $this->Flash->error(__('The sale could not be saved. Please, try again.'));
             }
-        }          
+        }
         $product = $this->Sales->Products->get($productId);
         $this->request->data['product_name'] = $product->name;
         $this->request->data['sale_price'] = $product->price;

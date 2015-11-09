@@ -30,13 +30,5 @@
     <div class="row">
         <?= $this->Text->autoParagraph(h($product->description)); ?>
     </div>
-    <div class="related">
-      <?php if (!empty($product->sale)): ?>
-        <?php echo '<h5>Vendido para '.$product->sale->buyer_name.' por '.$product->sale->sale_price.'</h5>'; ?>
-        <?= $this->Html->link(__('Sale Details'), ['controller' => 'Sales', 'action' => 'view', $product->sale->id], ['class' => 'button radius']); ?>
-      <?php else: ?>
-        <?= $this->Html->link(__('Sell'), ['controller' => 'Sales', 'action' => 'add', $product->id], ['class' => 'button radius']); ?>  
-      <?php endif; ?>
-    </div>
     <a href="javascript:history.back(-1);">Back</a>
 </div>
