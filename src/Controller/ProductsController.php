@@ -19,7 +19,18 @@ class ProductsController extends AppController
     public function index()
     {
 
-			  $this->paginate = ['contain' => ['ProductOwner', 'ProductCreatedBy', 'Sales']];
+			  $this->paginate = [
+					'contain' => ['ProductOwner', 'ProductCreatedBy', 'Sales'],
+					'sortWhitelist' => [
+						'id',
+						'name',
+						'ProductOwner.name',
+						'ProductCreatedBy.name',
+						'price',
+						'created',
+						'modified'
+						]
+					];
 
         $this->set('products', $this->paginate($this->Products));
         $this->set('_serialize', ['products']);

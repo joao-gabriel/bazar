@@ -1,23 +1,23 @@
 <?php echo $this->element('menu'); ?>
 <div class="products index large-9 medium-8 columns content">
-    <h3><?= __('Products') ?></h3> 
+    <h3><?= __('Products') ?></h3>
     <?= $this->Html->link(__('Print Labels for All Products'), ['action' => 'printlabels'], ['class' => 'button', 'target' => '_blank']) ?>
     <p><?= __('Gray rows means that product has been sold.'); ?></p>
     <table cellpadding="0" cellspacing="0" class="responsive">
         <thead>
             <tr>
-                <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('name') ?></th>
-                <th><?= $this->Paginator->sort('owner') ?></th>
-                <th><?= $this->Paginator->sort('created_by') ?></th>
-                <th><?= $this->Paginator->sort('price') ?></th>
-                <th><?= $this->Paginator->sort('created') ?></th>
-                <th><?= $this->Paginator->sort('modified') ?></th>
+                <th><?= $this->Paginator->sort('id', __('Code')) ?></th>
+                <th><?= $this->Paginator->sort('name', __('Name')) ?></th>
+                <th><?= $this->Paginator->sort('ProductOwner.name', __('Owner')) ?></th>
+                <th><?= $this->Paginator->sort('ProductCreatedBy.name', __('Created By')) ?></th>
+                <th><?= $this->Paginator->sort('price', __('Price')) ?></th>
+                <th><?= $this->Paginator->sort('created', __('Created')) ?></th>
+                <th><?= $this->Paginator->sort('modified', __('Modified')) ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($products as $product): ?>          
+            <?php foreach ($products as $product): ?>
             <tr <?php echo !empty($product->sale)?'style="background-color:#ccc"':'' ?>>
                 <td><?= $this->Number->format($product->id) ?></td>
                 <td><?= h($product->name) ?></td>
