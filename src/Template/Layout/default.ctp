@@ -20,7 +20,7 @@ $cakeDescription = 'Bazar';
     <?= $this->Html->script('jquery.min.js') ?>
     <?= $this->Html->script('fastclick.js') ?>
     <?= $this->Html->script('foundation.min.js') ?>
-    
+
     <?= $this->Html->script('responsive-tables.js') ?>
 
     <?= $this->fetch('meta') ?>
@@ -33,7 +33,7 @@ $cakeDescription = 'Bazar';
         table-layout: auto;
       }
       #actions-sidebar .active {
-        height: 310px;
+        height: 370px;
       }
       #actions-sidebar .active ul li{
         list-style: none;
