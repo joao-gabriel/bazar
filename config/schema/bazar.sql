@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.3.8
+-- version 4.4.10
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 07, 2015 at 09:58 AM
--- Server version: 5.5.38-35.2
--- PHP Version: 5.4.23
+-- Generation Time: Nov 09, 2015 at 08:23 AM
+-- Server version: 5.5.43-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,10 +14,10 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `phpag314_bazar`
+-- Database: `bazar`
 --
 
 -- --------------------------------------------------------
@@ -35,16 +35,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `price` decimal(10,2) NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`id`, `name`, `description`, `created_by`, `owner`, `price`, `created`, `modified`) VALUES
-(4, 'Sapato chiquéeeeerrimo', '', 4, 4, '25.00', '2015-11-05 00:18:35', '2015-11-05 00:18:35'),
-(5, 'Bolsa arrasadooooora', '', 4, 5, '34.00', '2015-11-05 00:18:54', '2015-11-05 00:18:54'),
-(6, 'Blusa Gap', 'Tamanho M e sem uso', 3, 5, '1.00', '2015-11-07 12:16:05', '2015-11-07 12:16:05');
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -59,7 +50,10 @@ CREATE TABLE IF NOT EXISTS `sales` (
   `buyer_name` varchar(255) NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
-  `registered_by` int(11) NOT NULL
+  `registered_by` int(11) NOT NULL,
+  `debit_card` tinyint(1) NOT NULL DEFAULT '0',
+  `buyer_email` varchar(255) DEFAULT NULL,
+  `buyer_phone` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -77,16 +71,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   `role` varchar(40) NOT NULL DEFAULT 'admin'
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `name`, `email`, `created`, `modified`, `role`) VALUES
-(3, 'admin', '$2y$10$2x9Y3YWp67riI4Fq97vpgu46GeHCoZaBvuMbyhcovATjL9VjwUEhy', 'Administrador Geral', 'joaogabrielv@gmail.com', '2015-11-04 16:41:50', '2015-11-04 16:41:50', 'admin'),
-(4, 'gisele', '$2y$10$E0NhOH7uY6LBZGpn1v6NTejkCo4pBPea8hW2qYVnK.oRitQFqbIRO', 'Gisele Lima', 'giselelima03@gmail.com', '2015-11-04 20:06:44', '2015-11-04 20:06:44', 'admin'),
-(5, 'fabiane', '$2y$10$KMxLZ4fcXI3s3Fc/zpxqiOgrUjPcgmSKQRCpDc8PU2oFWPKKDX9ty', 'Fabiane', 'fabiane@bla.com', '2015-11-04 23:46:29', '2015-11-04 23:46:29', 'admin');
+(3, 'admin', '$2y$10$2x9Y3YWp67riI4Fq97vpgu46GeHCoZaBvuMbyhcovATjL9VjwUEhy', 'Administrador Geral', 'joaogabrielv@gmail.com', '2015-11-04 16:41:50', '2015-11-04 16:41:50', 'admin')
 
 --
 -- Indexes for dumped tables
@@ -96,13 +88,17 @@ INSERT INTO `users` (`id`, `username`, `password`, `name`, `email`, `created`, `
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`), ADD KEY `fk_created_by_users` (`created_by`) USING BTREE, ADD KEY `fk_owner_users` (`owner`) USING BTREE;
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_created_by_users` (`created_by`) USING BTREE,
+  ADD KEY `fk_owner_users` (`owner`) USING BTREE;
 
 --
 -- Indexes for table `sales`
 --
 ALTER TABLE `sales`
-  ADD PRIMARY KEY (`id`), ADD KEY `fk_produck_id_products` (`product_id`), ADD KEY `fk_registered_by_users` (`registered_by`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_produck_id_products` (`product_id`),
+  ADD KEY `fk_registered_by_users` (`registered_by`);
 
 --
 -- Indexes for table `users`
@@ -118,7 +114,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `sales`
 --
@@ -128,7 +124,7 @@ ALTER TABLE `sales`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- Constraints for dumped tables
 --
@@ -137,15 +133,15 @@ ALTER TABLE `users`
 -- Constraints for table `products`
 --
 ALTER TABLE `products`
-ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`owner`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`owner`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `sales`
 --
 ALTER TABLE `sales`
-ADD CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`registered_by`) REFERENCES `users` (`id`),
-ADD CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+  ADD CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`registered_by`) REFERENCES `users` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
