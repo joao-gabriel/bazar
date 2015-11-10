@@ -30,10 +30,15 @@ class ProductsController extends AppController
 						'created',
 						'modified'
 						]
-					];
+				];
 
+				if (!empty($this->request->data['owner'])){
+					$this->paginate['conditions'] = ['owner' => $this->request->data['owner']];
+				}
         $this->set('products', $this->paginate($this->Products));
         $this->set('_serialize', ['products']);
+        $users = $this->Products->ProductOwner->find('list');
+        $this->set('users', $users);
     }
 
     /**

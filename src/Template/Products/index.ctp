@@ -1,7 +1,10 @@
 <?php echo $this->element('menu'); ?>
 <div class="products index large-9 medium-8 columns content">
     <h3><?= __('Products') ?></h3>
-    <?= $this->Html->link(__('Print Labels for All Products'), ['action' => 'printlabels'], ['class' => 'button', 'target' => '_blank']) ?>
+		<?= $this->Form->create('ownerFilter'); ?>
+		<?= $this->Form->input('owner', ['options' => $users, 'empty' => 'All']); ?>
+		<?= $this->Form->button(__('Filter')) ?>
+    <?= $this->Form->end(); ?>
     <p><?= __('Gray rows means that product has been sold.'); ?></p>
     <table cellpadding="0" cellspacing="0" class="responsive">
         <thead>
@@ -43,4 +46,5 @@
         </ul>
         <p><?= $this->Paginator->counter() ?></p>
     </div>
+     <?= $this->Html->link(__('Print Labels for All Products'), ['action' => 'printlabels'], ['class' => 'button', 'target' => '_blank']) ?>
 </div>
