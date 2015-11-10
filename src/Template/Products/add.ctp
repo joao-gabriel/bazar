@@ -4,7 +4,7 @@
     <fieldset>
         <legend><?= __('Add Product') ?></legend>
         <?php
-            echo $this->Form->input('name');
+            echo $this->Form->input('name', ['maxlength' => '40']);
             echo $this->Form->input('description');
             echo $this->Form->input('owner', ['options' => $users]);
             echo $this->Form->input('price');
