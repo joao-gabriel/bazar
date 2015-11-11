@@ -31,8 +31,8 @@ class ProductsTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->HasOne('Sales', [
-            'foreignKey' => 'product_id'
+        $this->belongsTo('Sales', [
+            'foreignKey' => 'id'
         ]);
 
         $this->belongsTo('ProductOwner', [

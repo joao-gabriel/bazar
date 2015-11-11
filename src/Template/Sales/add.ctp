@@ -4,7 +4,7 @@
     <fieldset>
         <legend><?= __('Add Sale') ?></legend>
         <?php
-            echo $this->Form->input('product_name', ['disabled' => 'disabled']);
+            echo $this->Form->input('product_id');
             echo $this->Form->input('sale_price');
             echo $this->Form->input('debit_card', ['id' => 'debit_card', 'type' => 'checkbox']);
             echo $this->Form->input('buyer_name');
@@ -23,5 +23,5 @@ $('#debit_card').click(function(){
     $('#sale-price').val(price+(price*0.03));
   }
   console.log(price);
-});  
+});
 </script>

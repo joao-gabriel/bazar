@@ -46,7 +46,7 @@ class SalesController extends AppController
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add($productId = null)
+    public function add()
     {
 				die('Under Construction. <a href="javascript:history.back(-1)">Back</a>');
         $sale = $this->Sales->newEntity();
