@@ -32,8 +32,9 @@ class ProductsController extends AppController
 						]
 				];
 
-				if (!empty($this->request->data['owner'])){
-					$this->paginate['conditions'] = ['owner' => $this->request->data['owner']];
+				if (!empty($_GET['owner'])){
+					$this->request->data['owner'] = $_GET['owner'];
+					$this->paginate['conditions'] = ['owner' => $_GET['owner']];
 				}
         $this->set('products', $this->paginate($this->Products));
         $this->set('_serialize', ['products']);

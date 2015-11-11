@@ -1,7 +1,7 @@
 <?php echo $this->element('menu'); ?>
 <div class="products index large-9 medium-8 columns content">
     <h3><?= __('Products') ?></h3>
-		<?= $this->Form->create('ownerFilter'); ?>
+		<?= $this->Form->create('ownerFilter', ['type' => 'get']); ?>
 		<?= $this->Form->input('owner', ['options' => $users, 'empty' => 'All']); ?>
 		<?= $this->Form->button(__('Filter')) ?>
     <?= $this->Form->end(); ?>
