@@ -5,7 +5,10 @@
 		<?= $this->Form->input('owner', ['options' => $users, 'empty' => 'All']); ?>
 		<?= $this->Form->button(__('Filter')) ?>
     <?= $this->Form->end(); ?>
-    <p><?= __('Gray rows means that product has been sold.'); ?></p>
+    <p>
+			<?= $this->Paginator->counter(__('{{count}} products were found.')) ?>
+			<?= __('Gray rows means that product has been sold.'); ?>
+		</p>
     <table cellpadding="0" cellspacing="0" class="responsive">
         <thead>
             <tr>
