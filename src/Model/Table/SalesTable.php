@@ -54,10 +54,10 @@ class SalesTable extends Table
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
 
-        $validator
-            ->add('sale_price', 'valid', ['rule' => 'decimal'])
-            ->requirePresence('sale_price', 'create')
-            ->notEmpty('sale_price');
+        //~ $validator
+            //~ ->add('sale_price', 'valid', ['rule' => 'decimal'])
+            //~ ->requirePresence('sale_price', 'create')
+            //~ ->notEmpty('sale_price');
 
         $validator
             ->requirePresence('buyer_name', 'create')
@@ -71,16 +71,4 @@ class SalesTable extends Table
         return $validator;
     }
 
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
-    public function buildRules(RulesChecker $rules)
-    {
-        $rules->add($rules->existsIn(['product_id'], 'Products'));
-        return $rules;
-    }
 }

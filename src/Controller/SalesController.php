@@ -48,11 +48,16 @@ class SalesController extends AppController
      */
     public function add()
     {
-				die('Under Construction. <a href="javascript:history.back(-1)">Back</a>');
+				//~ die('Under Construction. <a href="javascript:history.back(-1)">Back</a>');
         $sale = $this->Sales->newEntity();
         if ($this->request->is('post')) {
-          $this->request->data['product_id'] = $productId;
+
+					// http://book.cakephp.org/3.0/en/orm/saving-data.html#converting-hasmany-data
+					$this->request->data['products']['_ids'] = array_values($this->request->data['product_id']);
           $this->request->data['registered_by'] = (string)$this->Auth->User('id');
+
+          debug($this->request->data);
+
             $sale = $this->Sales->patchEntity($sale, $this->request->data);
             if ($this->Sales->save($sale)) {
                 $this->Flash->success(__('The sale has been saved.'));
@@ -61,10 +66,7 @@ class SalesController extends AppController
                 $this->Flash->error(__('The sale could not be saved. Please, try again.'));
             }
         }
-        $product = $this->Sales->Products->get($productId);
-        $this->request->data['product_name'] = $product->name;
-        $this->request->data['sale_price'] = $product->price;
-        $this->set(compact('sale', 'product'));
+        $this->set(compact('sale'));
         $this->set('_serialize', ['sale']);
     }
 
