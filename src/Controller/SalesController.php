@@ -53,7 +53,7 @@ class SalesController extends AppController
         if ($this->request->is('post')) {
 
 					// http://book.cakephp.org/3.0/en/orm/saving-data.html#converting-hasmany-data
-					$this->request->data['products']['_ids'] = array_values($this->request->data['product_id']);
+					$this->request->data['products']['_ids'] = $this->request->data['product_id'];
           $this->request->data['registered_by'] = (string)$this->Auth->User('id');
 
           debug($this->request->data);
@@ -61,6 +61,7 @@ class SalesController extends AppController
             $sale = $this->Sales->patchEntity($sale, $this->request->data);
             if ($this->Sales->save($sale)) {
                 $this->Flash->success(__('The sale has been made.'));
+                die();
                 return $this->redirect(['action' => 'add']);
             } else {
                 $this->Flash->error(__('The sale could not be saved. Please, try again.'));

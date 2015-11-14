@@ -1,10 +1,12 @@
 <?php echo $this->element('menu'); ?>
 <div class="sales view large-9 medium-8 columns content">
+    <?php var_dump($sale->products)?>
+  
     <h3><?= h($sale->product->name) ?> Sale</h3>
     <table class="vertical-table">
         <tr>
             <th><?= __('Product') ?></th>
-            <td><?= $sale->has('product') ? $this->Html->link($sale->product->name, ['controller' => 'Products', 'action' => 'view', $sale->product->id]) : '' ?></td>
+            <td><?= $sale->has('product') ? $this->Html->link($sale->products->name, ['controller' => 'Products', 'action' => 'view', $sale->product->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Buyer Name') ?></th>

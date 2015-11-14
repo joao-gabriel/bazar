@@ -36,11 +36,11 @@
       <?php
     }
     if ($this->request->data['debit_card']) {
-      $total = $total - ($total * 0.03);
+      $total = $total - ($total * 0.0239);
       ?>
       <tr>
-        <td><strong>Debit Card Discount (3%)</strong></td>
-        <td><span class="right"><?= $this->Number->currency($total * 0.03, 'BRL'); ?></span></td>
+        <td><strong>Debit Card Discount (2.39%)</strong></td>
+        <td><span class="right"><?= $this->Number->currency($total * 0.0239, 'BRL'); ?></span></td>
       </tr>
       <?php
     }
@@ -52,7 +52,7 @@
   </table>  
   <?= $this->Form->create($sale, ['action' => 'add']) ?>
   <fieldset>
-    <?= $this->Form->input('product_id.ids', ['type' => 'hidden', 'value' => implode(',', $productsIds)]) ?>  
+    <?= $this->Form->input('product_id', ['type' => 'hidden', 'value' => implode(',', $productsIds)]) ?>  
     <?= $this->Form->input('sale_price', ['type' => 'hidden', 'value' => $total]) ?>
     <?= $this->Form->input('buyer_name', ['type' => 'hidden', 'value' => $this->request->data['buyer_name']]) ?>
     <?= $this->Form->input('buyer_email', ['type' => 'hidden', 'value' => $this->request->data['buyer_email']]) ?>
