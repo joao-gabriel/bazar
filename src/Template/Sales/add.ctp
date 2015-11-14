@@ -1,6 +1,6 @@
 <?php echo $this->element('menu'); ?>
 <div class="sales form large-9 medium-8 columns content">
-    <?= $this->Form->create($sale) ?>
+    <?= $this->Form->create($sale, ['action' => 'confirmSale']) ?>
     <fieldset>
         <legend><?= __('Sell Products') ?></legend>
         <?php

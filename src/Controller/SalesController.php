@@ -70,6 +70,34 @@ class SalesController extends AppController
         $this->set('_serialize', ['sale']);
     }
 
+    public function confirmSale(){
+      
+        $sale = $this->Sales->newEntity();
+      
+        if ($this->request->is('post')) {
+          
+          $products = $this->Sales->Products->find('all',[
+             'conditions' => [
+                 'Products.id in ('.  implode(',', $this->request->data['product_id']).')'
+             ] 
+          ]);
+         
+
+          
+          
+        }else{
+          
+          die ('Method not allowed');
+          
+        }
+      
+          
+          
+        $this->set(compact('sale', 'products'));
+        $this->set('_serialize', ['sale']);        
+        
+    }
+    
     /**
      * Edit method
      *
