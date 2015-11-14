@@ -1,7 +1,11 @@
 <?php echo $this->element('menu'); ?>
 <div class="sales index large-9 medium-8 columns content">
   <h3><?= __('Sales') ?></h3>
-  <?= $this->Html->link(__('View Sales by Product Owner'), ['action' => 'by_product_owner'], ['class' => 'button'])  ?>
+  <?= $this->Html->link(__('View Sales by Product Owner'), [
+			'controller' => 'products',
+			'action' => 'sold'
+		],
+		['class' => 'button'])  ?>
   <table cellpadding="0" cellspacing="0" class="responsive">
     <thead>
       <tr>
@@ -42,7 +46,7 @@
                   <td></td>
                   <td><strong class='right'><?= __('Total with discounts'); ?></strong></td>
                   <td class="right"><?= $this->Number->currency($total-($total*0.0239), 'BRL') ?></td>
-                </tr>                
+                </tr>
                 <?php
               }
               ?>

@@ -42,6 +42,29 @@ class ProductsController extends AppController
         $this->set('users', $users);
     }
 
+
+  public function sold($owner = null){
+    //~ die('Under Construction. <a href="javascript:history.back(-1)">Back</a>');
+
+
+		if (!empty($_GET['owner'])){
+			$this->request->data['owner'] = $_GET['owner'];
+
+			$sales = $this->Products->find('all', [
+				'conditions' => [
+					'Products.owner' => $_GET['owner'],
+					'Products.sale_id IS NOT NULL'
+				]
+			])->contain(['ProductSales']);
+			$this->set('sales', $sales);
+		}
+
+		$users = $this->Products->ProductOwner->find('list');
+		$this->set('users', $users);
+
+  }
+
+
     /**
      * View method
      *

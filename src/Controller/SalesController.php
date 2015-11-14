@@ -18,21 +18,17 @@ class SalesController extends AppController {
    */
   public function index() {
     $this->paginate = [
-        'contain' => ['Products.ProductOwner', 
+        'contain' => ['Products.ProductOwner',
             'SalesRegisteredBy']
-    ]; 
+    ];
     $this->set('sales', $this->paginate($this->Sales));
     $this->set('_serialize', ['sales']);
-    
+
     $users = $this->Sales->Products->ProductOwner->find('list');
     $this->set(compact('users'));
-     
+
   }
 
-  public function byProductOwner($owner = null){
-    die('Under Construction. <a href="javascript:history.back(-1)">Back</a>');
-  }
-  
   /**
    * View method
    *
