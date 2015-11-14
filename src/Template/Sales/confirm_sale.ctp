@@ -36,18 +36,22 @@
       <?php
     }
     if ($this->request->data['debit_card']) {
-      $total = $total - ($total * 0.0239);
+      $totalSeller = $total - ($total * 0.0239);
       ?>
       <tr>
-        <td><strong>Debit Card Discount (2.39%)</strong></td>
+        <td><strong><?= __('Debit Card Discount (2.39%)') ?></strong></td>
         <td><span class="right"><?= $this->Number->currency($total * 0.0239, 'BRL'); ?></span></td>
       </tr>
+      <tr>
+        <td><strong><?= __('Total with discounts') ?></strong></td>      
+        <td><span class="right"><?= $this->Number->currency($totalSeller, 'BRL'); ?></span></td>
+      </tr>      
       <?php
     }
     ?>
     <tr>
-      <td><strong>TOTAL</strong></td>      
-      <td><span class="right"><?= $this->Number->currency($total, 'BRL'); ?></span></td>
+      <td><strong><?= __('TOTAL'); ?></strong></td>      
+      <td><strong><span class="right"><?= $this->Number->currency($total, 'BRL'); ?></span></strong></td>
     </tr>
   </table>  
   <?= $this->Form->create($sale, ['action' => 'add']) ?>
@@ -55,11 +59,12 @@
     <?= $this->Form->input('product_id', ['type' => 'hidden', 'value' => implode(',', $productsIds)]) ?>  
     <?= $this->Form->input('sale_price', ['type' => 'hidden', 'value' => $total]) ?>
     <?= $this->Form->input('buyer_name', ['type' => 'hidden', 'value' => $this->request->data['buyer_name']]) ?>
+    <?= $this->Form->input('debit_card', ['type' => 'hidden', 'value' => $this->request->data['debit_card']]) ?>
     <?= $this->Form->input('buyer_email', ['type' => 'hidden', 'value' => $this->request->data['buyer_email']]) ?>
     <?= $this->Form->input('buyer_phone', ['type' => 'hidden', 'value' => $this->request->data['buyer_phone']]) ?>
   </fieldset>
   <a href="javascript:history.back(-1)" class="left button"><?= __('Change'); ?></a>
-  <?php if ($total > 0 ) { ?>
+  <?php if ($total > 0) { ?>
     <?= $this->Form->button(__('Confirm Sell')) ?>
   <?php } ?>
   <?= $this->Form->end() ?>  

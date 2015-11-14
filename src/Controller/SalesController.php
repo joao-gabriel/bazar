@@ -18,12 +18,21 @@ class SalesController extends AppController {
    */
   public function index() {
     $this->paginate = [
-        'contain' => ['Products', 'SalesRegisteredBy']
-    ];
+        'contain' => ['Products.ProductOwner', 
+            'SalesRegisteredBy']
+    ]; 
     $this->set('sales', $this->paginate($this->Sales));
     $this->set('_serialize', ['sales']);
+    
+    $users = $this->Sales->Products->ProductOwner->find('list');
+    $this->set(compact('users'));
+     
   }
 
+  public function byProductOwner($owner = null){
+    die('Under Construction. <a href="javascript:history.back(-1)">Back</a>');
+  }
+  
   /**
    * View method
    *
@@ -45,7 +54,6 @@ class SalesController extends AppController {
    * @return void Redirects on successful add, renders view otherwise.
    */
   public function add() {
-    //~ die('Under Construction. <a href="javascript:history.back(-1)">Back</a>');
     $sale = $this->Sales->newEntity();
     if ($this->request->is('post')) {
 
@@ -76,11 +84,9 @@ class SalesController extends AppController {
           ]
       ]);
     } else {
-
       die('Method not allowed');
     }
-
-    $this->set(compact('sale', 'products'));
+    $this->set(compact('products', 'sale'));
     $this->set('_serialize', ['sale']);
   }
 
