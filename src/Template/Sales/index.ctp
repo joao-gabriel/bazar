@@ -1,7 +1,7 @@
 <?php echo $this->element('menu'); ?>
 <div class="sales index large-9 medium-8 columns content">
     <h3><?= __('Sales') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+    <table cellpadding="0" cellspacing="0" class="responsive">
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('product_id') ?></th>

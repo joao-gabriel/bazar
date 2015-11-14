@@ -60,8 +60,8 @@ class SalesController extends AppController
 
             $sale = $this->Sales->patchEntity($sale, $this->request->data);
             if ($this->Sales->save($sale)) {
-                $this->Flash->success(__('The sale has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->success(__('The sale has been made.'));
+                return $this->redirect(['action' => 'add']);
             } else {
                 $this->Flash->error(__('The sale could not be saved. Please, try again.'));
             }
@@ -81,10 +81,6 @@ class SalesController extends AppController
                  'Products.id in ('.  implode(',', $this->request->data['product_id']).')'
              ] 
           ]);
-         
-
-          
-          
         }else{
           
           die ('Method not allowed');
