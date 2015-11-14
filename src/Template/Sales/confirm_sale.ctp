@@ -59,6 +59,8 @@
     <?= $this->Form->input('buyer_phone', ['type' => 'hidden', 'value' => $this->request->data['buyer_phone']]) ?>
   </fieldset>
   <a href="javascript:history.back(-1)" class="left button"><?= __('Change'); ?></a>
-  <?= $this->Form->button(__('Confirm Sell')) ?>
+  <?php if ($total > 0 ) { ?>
+    <?= $this->Form->button(__('Confirm Sell')) ?>
+  <?php } ?>
   <?= $this->Form->end() ?>  
 </div>

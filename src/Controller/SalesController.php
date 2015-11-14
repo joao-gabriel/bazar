@@ -53,7 +53,7 @@ class SalesController extends AppController
         if ($this->request->is('post')) {
 
 					// http://book.cakephp.org/3.0/en/orm/saving-data.html#converting-hasmany-data
-					$this->request->data['products']['_ids'] = $this->request->data['product_id'];
+					$this->request->data['products']['_ids'] = explode(',' ,$this->request->data['product_id']);
           $this->request->data['registered_by'] = (string)$this->Auth->User('id');
 
           debug($this->request->data);
@@ -87,9 +87,7 @@ class SalesController extends AppController
           die ('Method not allowed');
           
         }
-      
-          
-          
+
         $this->set(compact('sale', 'products'));
         $this->set('_serialize', ['sale']);        
         
